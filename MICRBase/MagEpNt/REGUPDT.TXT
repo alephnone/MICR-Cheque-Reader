@@ -1,0 +1,58 @@
+               Mag-Tek NT KERNEL MODE DEVICE DRIVER
+
+The Mag-Tek NT 4.0 driver resides in a file named MagEpNt.sys. It is a 
+monolithic driver design accepting input from an application and sending 
+data out to a device I/O port. Data received from an application is 
+echoed back for diagnostic purposes and to aid in the development of a 
+product. 
+
+To install the Mag-Tek NT 4.0 driver product is very straight forward 
+for a person accustomed to working with personal computers. We will 
+describe the steps to follow, and taking the wrong turn is not going to 
+bring your system down.
+
+Manual Installation:
+
+1.  Install MICRbase.
+  
+2.  Bring up the NT 4.0 Operating System.
+ 
+3.  Copy the MagEpNt.sys file from folder MagEpNt, supplied with MICRbase,
+    to the NT system driver folder. The NT driver files are located in 
+    C:\Winnt\System32\Drivers. Your installation may have NT installed on 
+    a different drive than our example.
+ 
+4.  Open the folder MagEpNt, supplied with MICRbase, and run the
+    program REGINI.EXE followed by a space then MagEpNt.ini. This will
+    register your new driver into the system, it only has to be done once.
+ 
+5.  Take NT down, and restart the NT operating system, observe any 
+    informative system message that may appear. NT knows about your 
+    driver and it is ready to run.  It is not operating yet because the 
+    driver must manually be started. This manual feature prevents the 
+    unknown from occurring to a new installation.
+ 
+6.  To get your NT driver operating, click on the 
+    start\settings\controlpanel and double click on devices. A device 
+    dialog box appears and now you want to scroll down to the MagEpNt 
+    device driver. Click on start and wait for the timer to go away and 
+    you will see the device driver is now running. Your program now has 
+    access to it. You may stop the device using the same technique.
+
+
+***********************************************************************
+
+               MAG-TEK DEVICE DRIVER FILE MagEpNt.ini 
+
+\Registry\Machine\System\CurrentControlSet\Services\MagEpNt
+    Type = REG_DWORD 0x00000001
+    Start = REG_DWORD 0x00000003
+    Group = Extended Base
+    ErrorControl = REG_DWORD 0x00000001
+    Magep0
+        Parameters
+            PortAddress0 = REG_DWORD 0x00000060
+
+When you register the Mag-Tek driver this information will appear in 
+your registry. The information is used by the Device Driver in the 
+course of initializing. This file should not be changed.
